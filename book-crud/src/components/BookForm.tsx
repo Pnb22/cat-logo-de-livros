@@ -1,4 +1,4 @@
-import { useState, FormEvent } from "react";
+import { useState } from "react";
 import { Book } from "../types/Book";
 
 interface Props {
@@ -10,7 +10,7 @@ export function BookForm({ onAddBook }: Props) {
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState<Book["status"]>("Não lido");
 
-  function handleSubmit(e: FormEvent) {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
 
     onAddBook({
@@ -18,37 +18,35 @@ export function BookForm({ onAddBook }: Props) {
       author,
       status
     });
-
-    setTitle("");
-    setAuthor("");
-    setStatus("Não lido");
   }
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Adicionar Livro</h2>
-
       <input
-        placeholder="Título"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        placeholder="Título"
       />
 
       <input
-        placeholder="Autor"
         value={author}
         onChange={(e) => setAuthor(e.target.value)}
+        placeholder="Autor"
       />
 
       <select
         value={status}
-        onChange={(e) => setStatus(e.target.value as Book["status"])}
+        onChange={(e) =>
+          setStatus(e.target.value as Book["status"])
+        }
       >
         <option value="Não lido">Não lido</option>
         <option value="Lido">Lido</option>
       </select>
 
-      <button type="submit">Adicionar</button>
+      <button type="submit">
+        Adicionar
+      </button>
     </form>
   );
 }
