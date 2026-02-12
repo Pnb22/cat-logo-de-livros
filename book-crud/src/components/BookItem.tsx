@@ -1,20 +1,18 @@
 import { Book } from "../types/Book";
 
-interface BookItemProps {
+interface Props {
   book: Book;
   onRemove: (id: string) => void;
 }
 
-export function BookItem({ book, onRemove }: BookItemProps) {
+export function BookItem({ book, onRemove }: Props) {
   return (
     <li>
-      <strong>{book.title}</strong> — {book.author} ({book.status})
+      {book.title} - {book.author} ({book.status})
 
-      {book._id && (
-        <button onClick={() => onRemove(book._id!)}>
-          Remover
-        </button>
-      )}
+      <button onClick={() => onRemove(book._id!)}>
+        Remover
+      </button>
     </li>
   );
 }

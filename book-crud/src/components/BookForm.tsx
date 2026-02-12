@@ -1,11 +1,11 @@
 import { useState, FormEvent } from "react";
 import { Book } from "../types/Book";
 
-interface BookFormProps {
+interface Props {
   onAddBook: (book: Book) => void;
 }
 
-export function BookForm({ onAddBook }: BookFormProps) {
+export function BookForm({ onAddBook }: Props) {
   const [title, setTitle] = useState("");
   const [author, setAuthor] = useState("");
   const [status, setStatus] = useState<Book["status"]>("Não lido");
@@ -13,7 +13,11 @@ export function BookForm({ onAddBook }: BookFormProps) {
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
 
-    onAddBook({ title, author, status });
+    onAddBook({
+      title,
+      author,
+      status
+    });
 
     setTitle("");
     setAuthor("");
@@ -22,6 +26,8 @@ export function BookForm({ onAddBook }: BookFormProps) {
 
   return (
     <form onSubmit={handleSubmit}>
+      <h2>Adicionar Livro</h2>
+
       <input
         placeholder="Título"
         value={title}
